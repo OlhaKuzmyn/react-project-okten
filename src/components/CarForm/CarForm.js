@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {joiResolver} from "@hookform/resolvers/joi";
 
 import {carServices} from "../../services";
@@ -9,6 +9,8 @@ const CarForm = ({setNewCar, carForUpdate, carId}) => {
     const {register, reset, handleSubmit, formState: {errors}, setValue} = useForm({
         resolver:joiResolver(carValidator),
         mode:"onTouched"})
+
+    // const [updateCar, setUpdateCar] = useState(null)
 
     useEffect(()=> {
         if (carForUpdate){
@@ -21,18 +23,47 @@ const CarForm = ({setNewCar, carForUpdate, carId}) => {
         }
     },[carForUpdate, setValue])
 
-    // const carUpdate = async (carId, car) => {
-    //     await carServices.updateById(carId, car);
-    //     };
-    // const newCarSubmit = async (car) => {
+
+    const carSubmit = async (car, newCar) => {
+        if (carForUpdate){
+            const resp = await carServices.updateById(carId, newCar);
+            console.log(resp.data)
+            // setUpdateCar(data);
+            reset()
+        } else {
+            const {data} = await carServices.create(car);
+            setNewCar(data);
+            reset()
+        }
+    };
+
+
+    // const carSubmit = async (car) => {
     //     const {data} = await carServices.create(car);
     //     setNewCar(data);
     //     reset()};
+    // const carUpdate = async (carId, car) => {
+    //     const {data} = await carServices.updateById(carId, car);
+    //     setUpdateCar(data);
+    //     reset()}
 
-    const carSubmit = async (car) => {
-        const {data} = await carServices.create(car);
-        setNewCar(data);
-        reset()};
+    // const carSubmit =  (carId, car) => {
+    //     if (carForUpdate) {
+    //         const carUpdate = async (carId, car) => {
+    //             const {data} = await carServices.updateById(carId, car);
+    //             setUpdateCar(data);
+    //             reset()
+    //         };
+    //
+    //     } else {
+    //         const newCarSubmit = async (car) => {
+    //             const {data} = await carServices.create(car);
+    //             setNewCar(data);
+    //             reset()
+    //         };
+    //
+    //     }
+    // };
 
 
     return (

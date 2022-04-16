@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {carServices} from "../../services";
 import {Car} from "../Car/car";
 
-const Cars = ({newCar, setCarForUpdate, setCarId}) => {
+const Cars = ({newCar, setCarForUpdate, setCarId, setSCar}) => {
     const [cars, setCars]= useState([]);
     useEffect(()=> {
         carServices.getAll().then(({data})=>setCars(data))
@@ -16,7 +16,7 @@ const Cars = ({newCar, setCarForUpdate, setCarId}) => {
 
     return (
         <div>
-            {cars.map(car=> <Car key={car.id} car={car} setCarForUpdate={setCarForUpdate} setCarId={setCarId} />)}
+            {cars.map(car=> <Car key={car.id} car={car} setCarForUpdate={setCarForUpdate} setCarId={setCarId} setSCar={setSCar} />)}
         </div>
     );
 };
