@@ -23,6 +23,26 @@ const CarForm = ({setNewCar, carForUpdate, setUpdateCar}) => {
 
 
 
+    // from resolve
+    // const mySubmit = async (car) => {
+    //     try {
+    //         if (carForUpdate) {
+    //             const {data} = await carService.updateById(carForUpdate.id, car);
+    //             setUpdatedCar(data);
+    //             setCarForUpdate(false);
+    //         } else {
+    //             const {data} = await carService.create(car);
+    //             setNewCar(data);
+    //         }
+    //
+    //         reset()
+    //     } catch (e) {
+    //         // setFormError(e.response.data)
+    //     }
+    // }
+
+
+
     const carSubmit = async (car) => {
         const {data} = await carServices.create(car);
         setNewCar(data);
