@@ -1,18 +1,17 @@
 import {carServices} from "../../services";
 import {useEffect, useState} from "react";
 
-const Car = ({car, setCarForUpdate, setCarId, setSCar}) => {
+const Car = ({car, setCarForUpdate, setSCar}) => {
+
+    // const {updModel,updPrice,updYear}=updateCar;
+
     const {id,model,price,year}=car;
+
 
     const [showCar, setShowCar] = useState(true);
     const [selectedCarId, setSelectedCarId] = useState(null);
 
 
-    // const getCarById = async ()=>{
-    //     const {data} = await carServices.getById(selectedCarId);
-    //     setSCar(data)
-    // };
-    
     useEffect(()=>{
         carServices.getById(selectedCarId).then(({data})=>setSCar(data))
     },[selectedCarId, setSCar])
@@ -34,13 +33,15 @@ const Car = ({car, setCarForUpdate, setCarId, setSCar}) => {
                 <button onClick={() => deleteCar()}>delete</button>
                 <button onClick={() => {
                     setCarForUpdate(car)
-                    setCarId(id)
                 }}>update</button>
                 <button onClick={()=> {
                     setSelectedCarId(id)
+                    setShowCar(null)
                 }}>select</button>
                 <hr/>
             </div>
+
+
 
         )
     }
