@@ -22,7 +22,6 @@ const CarForm = ({setNewCar, carForUpdate, setUpdateCar}) => {
     },[carForUpdate, setValue])
 
 
-
     // from resolve
     // const mySubmit = async (car) => {
     //     try {
