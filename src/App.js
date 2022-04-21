@@ -1,6 +1,15 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
 import {MainLayout} from "./Layouts";
-import {AboutPage, CommentsPage, HomePage, NotFoundPage, PostsPage, SingleUserPage, UsersPage} from "./Pages";
+import {
+    AboutPage,
+    CommentsPage,
+    HomePage,
+    NotFoundPage,
+    PostsPage, SingleCommentPage,
+    SinglePostPage,
+    SingleUserPage,
+    UsersPage
+} from "./Pages";
 
 
 const App = () => {
@@ -13,9 +22,11 @@ const App = () => {
                   <Route path={':id'} element={<SingleUserPage/>} />
               </Route>
               <Route path={'posts'} element={<PostsPage/>}>
-
+                  <Route path={':id'} element={<SinglePostPage/>} />
               </Route>
-              <Route path={'comments'} element={<CommentsPage/>} />
+              <Route path={'comments'} element={<CommentsPage/>}>
+                  <Route path={':id'} element={<SingleCommentPage/>} />
+              </Route>
               <Route path={'about'} element={<AboutPage/>} />
               <Route path={'*'} element={<NotFoundPage/>} />
           </Route>
