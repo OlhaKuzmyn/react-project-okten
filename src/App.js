@@ -1,6 +1,15 @@
 import {Route, Routes, Navigate} from 'react-router-dom'
 import {MainLayout} from "./Layouts";
-import {AboutPage, HomePage, PostsPage, UserDetailsPage, UserPostsPage, UsersPage} from "./pages";
+import {
+    AboutPage,
+    HomePage,
+    PostCommentsPage,
+    PostDetailsPage,
+    PostsPage,
+    UserDetailsPage,
+    UserPostsPage,
+    UsersPage
+} from "./pages";
 
 const App = () => {
   return (
@@ -13,7 +22,11 @@ const App = () => {
                     <Route path={'posts'} element={<UserPostsPage/>}/>
                 </Route>
             </Route>
-            <Route path={'posts'} element={<PostsPage/>}></Route>
+            <Route path={'posts'} element={<PostsPage/>}>
+                <Route path={':id'} element={<PostDetailsPage/>}>
+                    <Route path={'comments'} element={<PostCommentsPage/>}/>
+                </Route>
+            </Route>
             <Route path={'about'} element={<AboutPage/>} />
         </Route>
       </Routes>
