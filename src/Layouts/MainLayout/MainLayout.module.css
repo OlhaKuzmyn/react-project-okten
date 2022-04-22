@@ -1,0 +1,15 @@
+.navigationBar{
+    display: flex;
+    justify-content: space-around;
+    background: darkred;
+    align-items: center;
+    min-height: 50px;
+}
+.navigationBar a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.navigationBar a[class='active']{
+    color: red;
+}
