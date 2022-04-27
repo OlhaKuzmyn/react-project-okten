@@ -1,7 +1,11 @@
+import {CatForm, Counters, Reducer} from "./components";
+
 const App = () => {
+
   return (
       <div>
-        App
+        {/*<Counters/>*/}
+          <CatForm/>
       </div>
   );
 };
