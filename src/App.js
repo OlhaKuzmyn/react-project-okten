@@ -4,9 +4,9 @@ import {CarForm} from "./components/CarForm/CarForm";
 const App = () => {
   return (
       <div>
-          <CarForm/>
+          <CarForm />
           <hr/>
-        <Cars/>
+        <Cars />
       </div>
   );
 };

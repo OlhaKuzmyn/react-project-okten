@@ -1,15 +1,32 @@
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {carActions} from "../../redux";
+import {useEffect} from "react";
 
 const CarForm = () => {
-    const {formErrors} = useSelector(state => state.cars);
-    const {reset, register, handleSubmit} = useForm();
+    const {formErrors,carForUpdate} = useSelector(state => state.cars);
+    const {reset, register, handleSubmit, setValue} = useForm();
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        if(carForUpdate){
+            const {model,price,year} = carForUpdate;
+            setValue('model',model);
+            setValue('price',price);
+            setValue('year',year)
+        }
+
+    },[carForUpdate, setValue])
+
     const saveCar = async (savedCar) =>{
-        await dispatch(carActions.createAsync({car: savedCar}))
-        reset()
+        if (carForUpdate){
+            await dispatch(carActions.updateById({newCar: savedCar, id: carForUpdate.id}))
+            reset()
+        } else {
+            await dispatch(carActions.createAsync({car: savedCar}))
+            reset()
+        }
+
     }
 
     return (

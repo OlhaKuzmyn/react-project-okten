@@ -10,7 +10,9 @@ const Car = ({car}) => {
             <h3>model: {model}</h3>
             <p>price: {price}</p>
             <p>year: {year}</p>
-            <button>update</button>
+            <button onClick={
+                ()=>dispatch(carActions.carForUpdate({car}))
+            }>update</button>
             <button onClick={()=>dispatch(carActions.deleteById({id}))}>delete</button>
             <hr/>
         </div>
