@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
 import {carService} from "../../services";
 
 const initialState = {
@@ -35,7 +36,7 @@ const updateById = createAsyncThunk(
             const {data} = await carService.updateById(id,newCar);
             dispatch(updateCar({newCar: data, id}))
         } catch (e) {
-
+            return rejectWithValue({status: e.message, formErrors: e.response.data })
         }
     }
 )
@@ -62,7 +63,8 @@ const carSlice = createSlice({
             state.carForUpdate = action.payload.car
         },
         updateCar: (state, action)=>{
-            state.cars.map(car=> car.id===action.payload.id ? action.payload.newCar : car )
+            state.cars = state.cars.map(car=> car.id===action.payload.id ? action.payload.newCar : car )
+            state.carForUpdate = null
         }
     },
     extraReducers: (builder)=>{
@@ -72,6 +74,11 @@ const carSlice = createSlice({
                 state.cars = action.payload
             })
             .addCase(createAsync.rejected, (state,action)=>{
+                const {status, formErrors} = action.payload;
+                state.status = status;
+                state.formErrors = formErrors
+            })
+            .addCase(updateById.rejected, (state,action)=>{
                 const {status, formErrors} = action.payload;
                 state.status = status;
                 state.formErrors = formErrors

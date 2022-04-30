@@ -12,7 +12,9 @@
     "react-redux": "^8.0.1",
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
-    "react-hook-form": "^7.30.0"
+    "react-hook-form": "^7.30.0",
+    "joi": "^17.6.0",
+    "@hookform/resolvers": "^2.8.8"
   },
   "scripts": {
     "start": "react-scripts start",
