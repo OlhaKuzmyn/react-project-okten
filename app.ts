@@ -40,6 +40,7 @@ interface IUser {
 }
 
 
+
 const user: IUser = {
     name:"Max",
     age:18,
