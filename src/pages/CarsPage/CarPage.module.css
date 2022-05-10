@@ -1,0 +1,4 @@
+.carPage {
+    display: flex;
+    justify-content: space-between;
+}
